@@ -18,10 +18,6 @@ public class ReplyCommentConstraint {
     private ReplyCommentRepository repository;
     private RestTemplate template;
 
-    public void checkExists(String commentId) {
-        checkExistsAndGet(commentId);
-    }
-
     public ReplyComment checkExistsAndGet(String commentId) {
         return repository
                 .findById(commentId)
