@@ -17,7 +17,11 @@ public class ReplyCommentService {
 
     public ReplyComment write(WriteReplyCommentCommand cmd) {
         constraint.checkReplyExists(cmd.getReplyId());
-        ReplyComment comment = ModelMapper.toReplyComment(cmd);
+        ReplyComment comment = new ReplyComment(
+                cmd.getReplyId(),
+                cmd.getBody(),
+                cmd.getCommenterId(),
+                cmd.getCommenterName());
         repository.save(comment);
         return comment;
     }
