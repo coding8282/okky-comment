@@ -10,6 +10,7 @@ import org.okky.share.domain.Aggregate;
 import java.util.UUID;
 
 import static java.lang.String.format;
+import static java.lang.System.currentTimeMillis;
 import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PUBLIC;
 import static org.okky.share.domain.AssertionConcern.assertArgLength;
@@ -46,14 +47,15 @@ public class ReplyComment implements Aggregate {
         setBody(body);
         setCommenterId(commenterId);
         setCommenterName(commenterName);
+        setCommentedOn(currentTimeMillis());
     }
 
     public static ReplyComment sample() {
-        String articleId = "a03";
+        String replyId = "a03";
         String body = "잘 키운 딸 하나가 아주 큰일 해내네요...";
         String replierId = "m-334455";
         String replierName = "coding8282";
-        return new ReplyComment(articleId, body, replierId, replierName);
+        return new ReplyComment(replyId, body, replierId, replierName);
     }
 
     public static void main(String[] args) {
@@ -62,6 +64,7 @@ public class ReplyComment implements Aggregate {
 
     public void modify(String body) {
         setBody(body);
+        setUpdatedOn(currentTimeMillis());
     }
 
     // ---------------------------------
@@ -77,6 +80,7 @@ public class ReplyComment implements Aggregate {
     }
 
     public void setBody(String body) {
+        assertArgNotNull(body, "코멘트 내용은 필수입니다.");
         String trimed = body.trim();
         assertArgLength(trimed, 2, 150, format("코멘트는 %d~%d자까지 가능합니다.", 2, 150));
         this.body = trimed;
