@@ -12,16 +12,13 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class ReplyCommentService {
+    ModelMapper mapper;
     private ReplyCommentRepository repository;
     private ReplyCommentConstraint constraint;
 
     public ReplyComment write(WriteReplyCommentCommand cmd) {
         constraint.checkReplyExists(cmd.getReplyId());
-        ReplyComment comment = new ReplyComment(
-                cmd.getReplyId(),
-                cmd.getBody(),
-                cmd.getCommenterId(),
-                cmd.getCommenterName());
+        ReplyComment comment = mapper.toModel(cmd);
         repository.save(comment);
         return comment;
     }
