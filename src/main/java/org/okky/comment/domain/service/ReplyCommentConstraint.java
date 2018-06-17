@@ -1,6 +1,7 @@
 package org.okky.comment.domain.service;
 
 import lombok.AllArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.okky.comment.domain.model.ReplyComment;
 import org.okky.comment.domain.repository.ReplyCommentRepository;
 import org.okky.share.execption.ExternalServiceError;
@@ -11,12 +12,14 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import static java.lang.String.format;
+import static lombok.AccessLevel.PRIVATE;
 
 @Service
 @AllArgsConstructor
+@FieldDefaults(level = PRIVATE)
 public class ReplyCommentConstraint {
-    private ReplyCommentRepository repository;
-    private RestTemplate template;
+    ReplyCommentRepository repository;
+    RestTemplate template;
 
     public ReplyComment checkExistsAndGet(String commentId) {
         return repository
