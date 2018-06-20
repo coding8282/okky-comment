@@ -25,6 +25,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 class ReplyCommentResource {
     ReplyCommentService service;
     ReplyCommentRepository repository;
+    ContextHolder holder;
 
     @GetMapping(value = "/comments/{commentId}/exists")
     boolean exists(@PathVariable String commentId) {
@@ -58,7 +59,7 @@ class ReplyCommentResource {
             @PathVariable String replyId,
             @RequestBody WriteReplyCommentCommand cmd) {
         cmd.setReplyId(replyId);
-        cmd.setCommenterId(ContextHelper.getId());
+        cmd.setCommenterId(holder.getId());
         ReplyComment comment = service.write(cmd);
         return ReplyCommentDto.toDto(comment);
     }
