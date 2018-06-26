@@ -35,10 +35,10 @@ public class ReplyCommentServiceTest extends TestMother {
         ReplyComment returned = service.write(cmd);
 
         InOrder o = inOrder(repository, constraint, mapper, comment);
-
         o.verify(constraint).checkReplyExists("r1");
         o.verify(mapper).toModel(cmd);
         o.verify(repository).save(comment);
-        assertEquals("", returned, comment);
+
+        assertEquals("반환된 모델은 같아야 한다.", returned, comment);
     }
 }
