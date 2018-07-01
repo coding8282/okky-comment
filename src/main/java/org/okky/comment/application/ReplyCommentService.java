@@ -7,6 +7,8 @@ import org.okky.comment.application.command.WriteReplyCommentCommand;
 import org.okky.comment.domain.model.ReplyComment;
 import org.okky.comment.domain.repository.ReplyCommentRepository;
 import org.okky.comment.domain.service.ReplyCommentConstraint;
+import org.okky.comment.domain.service.ReplyCommentProxy;
+import org.okky.share.event.ReplyCommented;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
@@ -19,24 +21,27 @@ public class ReplyCommentService {
     ModelMapper mapper;
     ReplyCommentRepository repository;
     ReplyCommentConstraint constraint;
+    ReplyCommentProxy proxy;
 
     public ReplyComment write(WriteReplyCommentCommand cmd) {
         constraint.checkReplyExists(cmd.getReplyId());
         ReplyComment comment = mapper.toModel(cmd);
         repository.save(comment);
+        ReplyCommented event = mapper.toEvent(comment);
+        proxy.sendEvent(event);
         return comment;
     }
 
     @PreAuthorize("@replyCommentSecurityInspector.isMe(#cmd.commentId)")
     public void modify(ModifyReplyCommentCommand cmd) {
-        ReplyComment reply = constraint.checkExistsAndGet(cmd.getCommentId());
-        reply.modify(cmd.getBody());
+        ReplyComment comment = constraint.checkExistsAndGet(cmd.getCommentId());
+        comment.modify(cmd.getBody());
     }
 
     @PreAuthorize("@replyCommentSecurityInspector.isMe(#commentId)")
     public void remove(String commentId) {
-        ReplyComment reply = constraint.checkExistsAndGet(commentId);
-        repository.delete(reply);
+        ReplyComment comment = constraint.checkExistsAndGet(commentId);
+        repository.delete(comment);
     }
 
     public void removeForce(String replyId) {
