@@ -20,6 +20,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <okky-share.version>1.0.1</okky-share.version>
+        <okky-share-event.version>1.0.0-SNAPSHOT</okky-share-event.version>
         <spring-cloud.version>Finchley.BUILD-SNAPSHOT</spring-cloud.version>
         <aws-java-sdk-dynamodb.version>1.11.64</aws-java-sdk-dynamodb.version>
         <spring-data-dynamodb.version>5.0.2</spring-data-dynamodb.version>
@@ -33,6 +34,11 @@
             <groupId>org.okky.share</groupId>
             <artifactId>okky-share</artifactId>
             <version>${okky-share.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.okky.share</groupId>
+            <artifactId>okky-share-event</artifactId>
+            <version>${okky-share-event.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
