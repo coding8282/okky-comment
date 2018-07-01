@@ -25,7 +25,6 @@
         <spring-data-dynamodb.version>5.0.2</spring-data-dynamodb.version>
         <DynamoDBLocal.version>[1.11,2.0)</DynamoDBLocal.version>
         <spring-data.version>Kay-SR5</spring-data.version>
-        <aws-java-sdk-sqs.version>1.11.340</aws-java-sdk-sqs.version>
         <spring-data-commons.version>2.0.7.RELEASE</spring-data-commons.version>
     </properties>
 
@@ -88,18 +87,13 @@
             <version>${spring-data-commons.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-aws-messaging</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>DynamoDBLocal</artifactId>
             <version>${DynamoDBLocal.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-sqs</artifactId>
-            <version>${aws-java-sdk-sqs.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-aws-messaging</artifactId>
         </dependency>
     </dependencies>
 
