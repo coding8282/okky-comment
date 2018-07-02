@@ -134,6 +134,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
             </plugin>
         </plugins>
         <extensions>
