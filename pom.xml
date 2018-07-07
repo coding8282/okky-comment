@@ -20,6 +20,7 @@
         <spring-data-dynamodb.version>5.0.2</spring-data-dynamodb.version>
         <spring-data.version>Kay-SR5</spring-data.version>
         <spring-data-commons.version>2.0.7.RELEASE</spring-data-commons.version>
+        <sonar.projectKey>okky-comment</sonar.projectKey>
     </properties>
 
     <dependencies>
